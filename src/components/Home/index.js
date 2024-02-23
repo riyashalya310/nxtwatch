@@ -59,7 +59,7 @@ class Home extends Component {
         homeVideosAPIStatus: homeVideosAPIStatusConstants.success,
       })
     } else {
-      console.log('Videos API failed')
+      console.log('Home Videos API failed')
       this.setState({homeVideosAPIStatus: homeVideosAPIStatusConstants.failure})
     }
   }
@@ -173,7 +173,7 @@ class Home extends Component {
         <div>
           <SideView />
           <div>
-            <BackGroundComponent disabled={close} data-testid="banner">
+            <BackGroundComponent close={close} data-testid="banner">
               <Link to="/">
                 <img
                   src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"

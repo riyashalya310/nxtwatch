@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const BackGroundComponent = styled.div`
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
+  display: ${props => (props.close ? 'none' : 'block')};
 `
 
 export const ThemeComponent = styled.div`

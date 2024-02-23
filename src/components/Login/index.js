@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import Cookies from 'js-cookie'
-import './index.css'
+import {ButtonComponent} from './styledComponents'
 
 class Login extends Component {
   state = {
@@ -89,12 +89,11 @@ class Login extends Component {
             <input
               type="checkbox"
               id="checkbox"
-              value={showPassword}
               onClick={this.onChangeShowPassword}
             />
             Show Password
           </label>
-          <button type="submit">Login</button>
+          <ButtonComponent type="submit">Login</ButtonComponent>
           <p>{errorMsg}</p>
         </form>
       </div>

@@ -5,8 +5,8 @@ import './index.css'
 import Loader from 'react-loader-spinner'
 import Header from '../Header'
 import SideView from '../SideView'
-import ReactContext from '../context/ReactContext'
 import {ThemeComponent} from '../Home/styledComponents'
+import ReactContext from '../context/ReactContext'
 
 const trendingVideosAPIConstants = {
   initial: 'INITIAL',
@@ -64,8 +64,6 @@ class Trending extends Component {
 
   renderSuccess = () => {
     const {trendingVideos} = this.state
-    const currentDate = new Date().getFullYear()
-    console.log(currentDate)
     return (
       <div>
         {trendingVideos.length > 0 ? (
@@ -82,8 +80,7 @@ class Trending extends Component {
                     <p>{video.title}</p>
                     <p>{video.channel.name}</p>
                     <p>
-                      {video.viewCount} views .{' '}
-                      {currentDate - video.publishedAt} years ago
+                      {video.viewCount} views . {video.publishedAt} years ago
                     </p>
                   </button>
                 </li>
@@ -158,13 +155,18 @@ class Trending extends Component {
   render() {
     return (
       <ReactContext.Consumer>
-        <ThemeComponent>
-          <Header />
-          <div>
-            <SideView />
-            <h1>Trending</h1>
-          </div>
-        </ThemeComponent>
+        {value => {
+          const {darkMode} = value
+          return (
+            <ThemeComponent darkMode={darkMode}>
+              <Header />
+              <div>
+                <SideView />
+                <h1>Trending</h1>
+              </div>
+            </ThemeComponent>
+          )
+        }}
       </ReactContext.Consumer>
     )
   }
