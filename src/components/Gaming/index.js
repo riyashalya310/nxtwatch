@@ -143,6 +143,7 @@ class Gaming extends Component {
         <div>
           <SideView />
           <h1>Gaming</h1>
+          {this.renderResult()}
         </div>
       </ThemeComponent>
     )

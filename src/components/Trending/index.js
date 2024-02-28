@@ -163,6 +163,7 @@ class Trending extends Component {
               <div>
                 <SideView />
                 <h1>Trending</h1>
+                {this.renderResult()}
               </div>
             </ThemeComponent>
           )
