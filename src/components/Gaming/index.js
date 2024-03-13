@@ -60,15 +60,15 @@ class Gaming extends Component {
         {gamingVideos.length > 0 ? (
           <ul>
             {gamingVideos.map(video => (
-              <Link to={`/videos/${video.id}`}>
-                <li key={video.id}>
+              <li key={video.id}>
+                <Link to={`/videos/${video.id}`}>
                   <button type="button">
                     <img src={video.thumbnailUrl} alt="video thumbnail" />
                     <p>{video.title}</p>
                     <p>{video.viewCount} Watching WorldWide</p>
                   </button>
-                </li>
-              </Link>
+                </Link>
+              </li>
             ))}
           </ul>
         ) : (

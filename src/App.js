@@ -20,41 +20,52 @@ class App extends Component {
     dislikedVideos: [],
   }
 
-  onChangeDarkMode = () => {
-    this.setState(prevState => ({darkMode: !prevState.darkMode}))
+  onChangeLikedVideos = (isLiked, id) => {
+    if (!isLiked) {
+      // Add video details to the list of saved videos
+      const videoDetails = {
+        isLiked: true,
+        id,
+      }
+      this.setState(prevState => [...prevState.likedVideos, videoDetails])
+    } else {
+      // Remove video details from the list of saved videos
+      this.setState(prevState =>
+        prevState.likedVideos.filter(video => video.id !== id),
+      )
+    }
   }
 
-  onChangeLikedVideos = id => {
-    this.setState(prevState => ({
-      likedVideos: prevState.likedVideos.map(video => {
-        if (video.id === id) {
-          return {...video, isLiked: !video.isLiked}
-        }
-        return {...video, isLiked: !video.isLiked}
-      }),
-    }))
+  onChangeDislikedVideos = (isDisliked, id) => {
+    if (!isDisliked) {
+      // Add video details to the list of saved videos
+      const videoDetails = {
+        isDisliked: true,
+        id,
+      }
+      this.setState(prevState => [...prevState.dislikedVideos, videoDetails])
+    } else {
+      // Remove video details from the list of saved videos
+      this.setState(prevState =>
+        prevState.dislikedVideos.filter(video => video.id !== id),
+      )
+    }
   }
 
-  onChangeDislikedVideos = id => {
-    this.setState(prevState => ({
-      dislikedVideos: prevState.dislikedVideos.map(video => {
-        if (video.id === id) {
-          return {...video, isDisliked: !video.isDisliked}
-        }
-        return {...video, isDisliked: !video.isDisliked}
-      }),
-    }))
-  }
-
-  onSaveVideo = id => {
-    this.setState(prevState => ({
-      savedVideos: prevState.savedVideos.map(video => {
-        if (video.id === id) {
-          return {...video, isSaved: !video.isSaved}
-        }
-        return {...video, isSaved: !video.isSaved}
-      }),
-    }))
+  onSaveVideo = (isSaved, id) => {
+    if (!isSaved) {
+      // Add video details to the list of saved videos
+      const videoDetails = {
+        isSaved: true,
+        id,
+      }
+      this.setState(prevState => [...prevState.savedVideos, videoDetails])
+    } else {
+      // Remove video details from the list of saved videos
+      this.setState(prevState =>
+        prevState.dislikedVideos.filter(video => video.id !== id),
+      )
+    }
   }
 
   render() {

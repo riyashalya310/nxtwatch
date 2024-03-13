@@ -20,6 +20,9 @@ class VideoItemDetails extends Component {
   state = {
     videoDetails: {},
     videoDetailsAPIStatus: videoDetailsAPIStatusConstants.initial,
+    isLiked: false,
+    isDisliked: false,
+    isSaved: false,
   }
 
   componentDidMount() {
@@ -74,24 +77,31 @@ class VideoItemDetails extends Component {
       <ReactContext.Consumer>
         {value => {
           const {
-            onSaveVideo,
-            onChangeLikedVideos,
-            onChangeDislikedVideos,
             savedVideos,
             likedVideos,
             dislikedVideos,
+            onSaveVideo,
+            onChangeLikedVideos,
+            onChangeDislikedVideos,
           } = value
+          const {isLiked, isDisliked, isSaved} = this.state
+          const {match} = this.props
+          const {params} = match
+          const {id} = params
 
-          const saveVideo = () => {
-            onSaveVideo(videoDetails.id)
+          const onChangeIsDisliked = () => {
+            onChangeDislikedVideos(isDisliked, id)
+            this.setState(prevState => ({isDisliked: !prevState.isDisliked}))
           }
 
-          const changeLikedVideos = () => {
-            onChangeLikedVideos(videoDetails.id)
+          const onChangeIsLiked = () => {
+            onChangeLikedVideos(isLiked, id)
+            this.setState(prevState => ({isLiked: !prevState.isLiked}))
           }
 
-          const changeDislikedVideos = () => {
-            onChangeDislikedVideos(videoDetails.id)
+          const onChangeIsSaved = () => {
+            onSaveVideo(isSaved, id)
+            this.setState(prevState => ({isSaved: !prevState.isSaved}))
           }
 
           const isLikedVideo = likedVideos.find(
@@ -116,21 +126,21 @@ class VideoItemDetails extends Component {
               </p>
               <button
                 type="button"
-                onClick={changeLikedVideos}
+                onClick={onChangeIsLiked}
                 disabled={isLikedVideo.isLiked}
               >
                 <AiOutlineLike /> Like
               </button>
               <button
                 type="button"
-                onClick={changeDislikedVideos}
+                onClick={onChangeIsDisliked}
                 disabled={isDislikedVideo.isDisliked}
               >
                 <AiOutlineDislike /> Dislike
               </button>
               <button
                 type="button"
-                onClick={saveVideo}
+                onClick={onChangeIsSaved}
                 disabled={isSavedVideo.isSaved}
               >
                 {isSavedVideo.isSaved ? 'Saved' : 'Save'}
